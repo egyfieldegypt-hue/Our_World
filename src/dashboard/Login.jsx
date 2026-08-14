@@ -92,7 +92,7 @@ export default function Login({ onSuccess, title, subtitle, hideBackToSite }) {
   const locked = Date.now() < lockedUntil;
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-ink px-4">
+    <div className="fixed inset-0 z-[80] flex items-center justify-center overflow-y-auto bg-ink px-4 py-6">
       <div className="w-full max-w-md">
         <div className="text-center">
           <img
@@ -105,7 +105,7 @@ export default function Login({ onSuccess, title, subtitle, hideBackToSite }) {
           <p className="mt-1 text-sm text-cream/45">{subtitle ?? t('dashboard.subtitle')}</p>
         </div>
 
-        <div className="mt-8 rounded-2xl border border-white/10 bg-surface/70 p-6">
+        <div className="mt-8 rounded-2xl border border-white/10 bg-surface/70 p-4 sm:p-6">
           <form onSubmit={submit} className="flex flex-col gap-4">
             <Field label={t('dashboard.username')}>
               <input

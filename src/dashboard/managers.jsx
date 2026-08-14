@@ -51,7 +51,7 @@ function ListShell({ items, onAdd, onEdit, onDelete, onMoveUp, onMoveDown, rende
   return (
     <div className="flex flex-col gap-3">
       <div className="flex justify-end">
-        <Btn variant="gold" onClick={onAdd}>
+        <Btn variant="gold" onClick={onAdd} className="w-full justify-center sm:w-auto">
           + {t('dashboard.actions.add')}
         </Btn>
       </div>
@@ -59,18 +59,20 @@ function ListShell({ items, onAdd, onEdit, onDelete, onMoveUp, onMoveDown, rende
         <p className="py-10 text-center text-cream/40">{empty}</p>
       ) : (
         items.map((it, i) => (
-          <div key={it.id} className="flex items-center gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-3.5">
-            <span className="w-8 shrink-0 text-center text-sm font-bold tabular-nums text-gold/60">{i + 1}</span>
-            {renderRow(it)}
-            <div className="ms-auto flex shrink-0 items-center gap-2">
+          <div key={it.id} className="flex flex-col gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-3.5 sm:flex-row sm:items-center">
+            <div className="flex min-w-0 items-center gap-3">
+              <span className="w-8 shrink-0 text-center text-sm font-bold tabular-nums text-gold/60">{i + 1}</span>
+              {renderRow(it)}
+            </div>
+            <div className="flex shrink-0 flex-wrap items-center justify-end gap-2 sm:ms-auto sm:flex-nowrap">
               {onMoveUp && onMoveDown && (
-                <div className="flex flex-col">
+                <div className="flex rounded-full border border-white/10">
                   <button
                     type="button"
                     onClick={() => onMoveUp(it, i)}
                     disabled={i === 0}
                     aria-label={t('dashboard.actions.moveUp')}
-                    className="grid size-6 place-items-center rounded-full text-cream/40 transition-colors hover:text-gold disabled:opacity-25"
+                    className="grid size-10 place-items-center rounded-full text-cream/40 transition-colors hover:text-gold disabled:opacity-25 sm:size-8"
                   >
                     <IconArrowUp className="size-3.5" />
                   </button>
@@ -79,18 +81,18 @@ function ListShell({ items, onAdd, onEdit, onDelete, onMoveUp, onMoveDown, rende
                     onClick={() => onMoveDown(it, i)}
                     disabled={i === items.length - 1}
                     aria-label={t('dashboard.actions.moveDown')}
-                    className="grid size-6 place-items-center rounded-full text-cream/40 transition-colors hover:text-gold disabled:opacity-25"
+                    className="grid size-10 place-items-center rounded-full text-cream/40 transition-colors hover:text-gold disabled:opacity-25 sm:size-8"
                   >
                     <IconArrowDown className="size-3.5" />
                   </button>
                 </div>
               )}
               {onEdit && (
-                <button type="button" onClick={() => onEdit(it)} className="rounded-full border border-white/10 px-4 py-1.5 text-xs font-bold text-cream/70 transition-colors hover:border-gold/50 hover:text-gold">
+                <button type="button" onClick={() => onEdit(it)} className="min-h-10 rounded-full border border-white/10 px-4 py-2 text-xs font-bold text-cream/70 transition-colors hover:border-gold/50 hover:text-gold">
                   {t('dashboard.actions.edit')}
                 </button>
               )}
-              <button type="button" onClick={() => window.confirm(t('dashboard.actions.confirmDelete')) && onDelete(it.id)} className="rounded-full border border-white/10 px-4 py-1.5 text-xs font-bold text-cream/50 transition-colors hover:border-rose/50 hover:text-rose">
+              <button type="button" onClick={() => window.confirm(t('dashboard.actions.confirmDelete')) && onDelete(it.id)} className="min-h-10 rounded-full border border-white/10 px-4 py-2 text-xs font-bold text-cream/50 transition-colors hover:border-rose/50 hover:text-rose">
                 {t('dashboard.actions.delete')}
               </button>
             </div>
@@ -106,9 +108,9 @@ function EditorModal({ open, title, onClose, onSave, saving, children }) {
   return (
     <Modal open={open} onClose={onClose} title={title}>
       <div className="flex flex-col gap-4">{children}</div>
-      <div className="mt-6 flex justify-end gap-3">
-        <Btn onClick={onClose}>{t('dashboard.actions.cancel')}</Btn>
-        <Btn variant="gold" onClick={onSave} disabled={saving}>
+      <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+        <Btn onClick={onClose} className="w-full sm:w-auto">{t('dashboard.actions.cancel')}</Btn>
+        <Btn variant="gold" onClick={onSave} disabled={saving} className="w-full sm:w-auto">
           {saving ? '…' : t('dashboard.actions.save')}
         </Btn>
       </div>
@@ -186,7 +188,7 @@ export function MemoryManager() {
                       key={c}
                       type="button"
                       onClick={() => setEditing({ ...editing, categories: on ? editing.categories.filter((x) => x !== c) : [...editing.categories, c] })}
-                      className={`rounded-full border px-4 py-1.5 text-xs font-bold transition-colors ${on ? 'border-gold/60 bg-gold/15 text-gold' : 'border-white/12 text-cream/50 hover:text-cream'}`}
+                      className={`min-h-10 rounded-full border px-4 py-2 text-xs font-bold transition-colors ${on ? 'border-gold/60 bg-gold/15 text-gold' : 'border-white/12 text-cream/50 hover:text-cream'}`}
                     >
                       {t(`wall.filters.${c}`)}
                     </button>

@@ -103,11 +103,11 @@
     "madeFor": "Made with love, for {names}",
     "top": "Back to top",
     "rights": "Every memory of ours lives in our hearts.",
-    "dashboard": "Dashboard",
+    "dashboard": "Manage Our Memories",
     "logout": "Sign out"
   },
   "dashboard": {
-"title": "Dashboard",
+"title": "Manage Our Memories",
     "subtitle": "Everything in BAYNA, from here",
     "username": "Username",
     "password": "Password",

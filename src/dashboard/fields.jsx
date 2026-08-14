@@ -3,7 +3,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import { storageUrl, supabase } from '../lib/supabase';
 
 export const inputCls =
-  'w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-sm text-cream placeholder:text-cream/30 outline-none transition-colors focus:border-gold/50';
+  'w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-3 text-base text-cream placeholder:text-cream/30 outline-none transition-colors focus:border-gold/50 sm:py-2.5 sm:text-sm';
 
 export function Field({ label, children, className = '' }) {
   return (
@@ -44,7 +44,7 @@ export function ColorField({ label, value, onChange }) {
           type="color"
           value={/^#[0-9a-fA-F]{6}$/.test(value || '') ? value : '#D98C9A'}
           onChange={(e) => onChange(e.target.value)}
-          className="h-10 w-14 cursor-pointer rounded-lg border border-white/10 bg-transparent"
+          className="h-12 w-16 cursor-pointer rounded-lg border border-white/10 bg-transparent sm:h-10 sm:w-14"
         />
         <TextInput value={value} onChange={onChange} className="flex-1" />
       </div>
@@ -76,7 +76,7 @@ export function ImageField({ label, value, onChange }) {
 
   return (
     <Field label={label}>
-      <div className="flex items-center gap-3">
+      <div className="flex items-start gap-3">
         {src ? (
           <img src={src} alt="" className="h-14 w-14 shrink-0 rounded-lg border border-white/10 object-cover" />
         ) : (
@@ -97,7 +97,7 @@ export function ImageField({ label, value, onChange }) {
               type="button"
               onClick={() => ref.current?.click()}
               disabled={busy || !supabase}
-              className="rounded-full border border-gold/40 bg-gold/10 px-3.5 py-1.5 text-xs font-bold text-gold transition-colors hover:bg-gold/20 disabled:opacity-40"
+              className="min-h-10 rounded-full border border-gold/40 bg-gold/10 px-3.5 py-2 text-xs font-bold text-gold transition-colors hover:bg-gold/20 disabled:opacity-40"
             >
               {busy ? t('dashboard.common.uploading') : t('dashboard.common.upload')}
             </button>
@@ -105,7 +105,7 @@ export function ImageField({ label, value, onChange }) {
               <button
                 type="button"
                 onClick={() => onChange('')}
-                className="rounded-full border border-white/10 px-3.5 py-1.5 text-xs font-bold text-cream/50 transition-colors hover:border-rose/50 hover:text-rose"
+                className="min-h-10 rounded-full border border-white/10 px-3.5 py-2 text-xs font-bold text-cream/50 transition-colors hover:border-rose/50 hover:text-rose"
               >
                 {t('dashboard.common.removeImage')}
               </button>
@@ -147,7 +147,7 @@ export function AudioField({ label, value, onChange, placeholder = '' }) {
 
   return (
     <Field label={label}>
-      <div className="flex items-center gap-3">
+      <div className="flex items-start gap-3">
         <div className="min-w-0 flex-1">
           <input
             type="text"
@@ -162,7 +162,7 @@ export function AudioField({ label, value, onChange, placeholder = '' }) {
               type="button"
               onClick={() => ref.current?.click()}
               disabled={busy || !supabase}
-              className="rounded-full border border-gold/40 bg-gold/10 px-3.5 py-1.5 text-xs font-bold text-gold transition-colors hover:bg-gold/20 disabled:opacity-40"
+              className="min-h-10 rounded-full border border-gold/40 bg-gold/10 px-3.5 py-2 text-xs font-bold text-gold transition-colors hover:bg-gold/20 disabled:opacity-40"
             >
               {busy ? t('dashboard.common.uploading') : t('dashboard.common.uploadAudio')}
             </button>
@@ -170,7 +170,7 @@ export function AudioField({ label, value, onChange, placeholder = '' }) {
               <button
                 type="button"
                 onClick={() => onChange('')}
-                className="rounded-full border border-white/10 px-3.5 py-1.5 text-xs font-bold text-cream/50 transition-colors hover:border-rose/50 hover:text-rose"
+                className="min-h-10 rounded-full border border-white/10 px-3.5 py-2 text-xs font-bold text-cream/50 transition-colors hover:border-rose/50 hover:text-rose"
               >
                 {t('dashboard.common.removeImage')}
               </button>
@@ -193,20 +193,20 @@ export function Modal({ open, onClose, title, children }) {
   if (!open) return null;
   return (
     <div
-      className="fixed inset-0 z-[80] flex items-center justify-center bg-ink/90 p-4 backdrop-blur-md"
+      className="fixed inset-0 z-[80] flex items-end justify-center bg-ink/90 p-0 backdrop-blur-md sm:items-center sm:p-4"
       onClick={(e) => e.target === e.currentTarget && onClose()}
       role="dialog"
       aria-modal="true"
       aria-label={title}
     >
-      <div className="max-h-[88vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/10 bg-surface p-6 shadow-[0_30px_90px_-30px_rgba(0,0,0,0.9)]">
+      <div className="max-h-[92svh] w-full max-w-2xl overflow-y-auto rounded-t-2xl border border-white/10 bg-surface p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] shadow-[0_30px_90px_-30px_rgba(0,0,0,0.9)] sm:max-h-[88vh] sm:rounded-2xl sm:p-6">
         <div className="mb-5 flex items-center justify-between gap-4">
           <h3 className="font-display text-xl font-bold text-cream">{title}</h3>
           <button
             type="button"
             onClick={onClose}
             aria-label={title}
-            className="grid size-9 place-items-center rounded-full border border-white/10 text-cream/60 transition-colors hover:border-gold/50 hover:text-gold"
+            className="grid size-11 shrink-0 place-items-center rounded-full border border-white/10 text-cream/60 transition-colors hover:border-gold/50 hover:text-gold sm:size-9"
           >
             ✕
           </button>
@@ -228,7 +228,7 @@ export function Btn({ children, onClick, variant = 'ghost', className = '', type
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`rounded-full px-5 py-2.5 text-sm font-bold transition-colors disabled:opacity-40 ${styles[variant]} ${className}`}
+      className={`min-h-11 rounded-full px-5 py-2.5 text-sm font-bold transition-colors disabled:opacity-40 ${styles[variant]} ${className}`}
     >
       {children}
     </button>
