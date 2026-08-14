@@ -140,6 +140,8 @@
       "titleEn": "Title (English)",
       "descAr": "Description (Arabic)",
       "descEn": "Description (English)",
+      "descriptionAr": "Description (Arabic)",
+      "descriptionEn": "Description (English)",
       "locationAr": "Location (Arabic)",
       "locationEn": "Location (English)",
       "image": "Image or URL",

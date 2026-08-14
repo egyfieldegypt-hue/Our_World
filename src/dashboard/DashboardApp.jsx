@@ -186,7 +186,7 @@ export default function DashboardApp() {
           </div>
           <div className="flex shrink-0 items-center gap-2">
             <LanguageSwitcher className="hidden sm:flex" />
-            <a href="#home" className="hidden rounded-full border border-white/10 px-4 py-2 text-xs font-bold text-cream/60 transition-colors hover:border-gold/50 hover:text-gold md:block">
+            <a href="#home" className="min-h-10 rounded-full border border-white/10 px-3 py-2 text-xs font-bold text-cream/60 transition-colors hover:border-gold/50 hover:text-gold sm:px-4">
               {t('dashboard.backToSite')}
             </a>
             <button
