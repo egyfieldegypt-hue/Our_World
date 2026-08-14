@@ -121,7 +121,8 @@
       "letters": "Letters",
       "chapters": "Chapters",
       "settings": "Settings",
-      "texts": "Texts"
+      "texts": "Texts",
+      "admins": "Admins"
     },
     "actions": {
       "add": "Add",

@@ -1,23 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
-import { sha256Hex } from '../lib/sha256';
+import { supabase } from '../lib/supabase';
 import { AUTH } from './secret';
+import { hashAdminPassword, safeEq } from './auth';
 import { Btn, Field, inputCls } from './fields';
 
 export const SESSION_KEY = 'bayna-session';
 const SESSION_TTL = 12 * 60 * 60 * 1000;
 const MAX_FAILS = 5;
 const LOCK_MS = 30 * 1000;
-
-async function sha256(text) {
-  if (crypto?.subtle) {
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-    return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
-  }
-  return sha256Hex(text);
-}
-
-const safeEq = (a, b) => a.length === b.length && [...a].reduce((acc, c, i) => acc | (c.charCodeAt(0) ^ b.charCodeAt(i)), 0) === 0;
 
 export function restoreSession() {
   try {
@@ -28,6 +19,25 @@ export function restoreSession() {
   } catch {
     return false;
   }
+}
+
+async function checkBundledAdmin(username, password) {
+  const hash = await hashAdminPassword(username, password, AUTH.salt);
+  return username.trim().toLowerCase() === AUTH.username.toLowerCase() && safeEq(hash, AUTH.hash);
+}
+
+async function checkDatabaseAdmin(username, password) {
+  if (!supabase) return false;
+  const normalized = username.trim().toLowerCase();
+  const { data, error } = await supabase
+    .from('admins')
+    .select('username,salt,password_hash')
+    .eq('username', normalized)
+    .maybeSingle();
+  if (error) return false;
+  if (!data) return false;
+  const hash = await hashAdminPassword(normalized, password, data.salt);
+  return safeEq(hash, data.password_hash);
 }
 
 export default function Login({ onSuccess, title, subtitle, hideBackToSite }) {
@@ -55,8 +65,8 @@ export default function Login({ onSuccess, title, subtitle, hideBackToSite }) {
     setBusy(true);
     setError('');
     try {
-      const hash = await sha256(`${AUTH.salt}:${username.trim().toLowerCase()}:${password}`);
-      if (username.trim().toLowerCase() === AUTH.username.toLowerCase() && safeEq(hash, AUTH.hash)) {
+      const ok = (await checkDatabaseAdmin(username, password)) || (await checkBundledAdmin(username, password));
+      if (ok) {
         sessionStorage.setItem(SESSION_KEY, JSON.stringify({ at: Date.now() }));
         setFails(0);
         onSuccess();

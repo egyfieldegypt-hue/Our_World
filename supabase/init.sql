@@ -146,3 +146,22 @@ do $$ begin
     create policy "public write bayna bucket" on storage.objects for all using (bucket_id = 'bayna') with check (bucket_id = 'bayna');
   end if;
 end $$;
+
+-- ---------- 7. dashboard admins ----------
+create table if not exists public.admins (
+  id uuid primary key default gen_random_uuid(),
+  username text not null unique,
+  salt text not null,
+  password_hash text not null,
+  created_at timestamptz not null default now()
+);
+alter table public.admins enable row level security;
+
+do $$ begin
+  if not exists (select 1 from pg_policies where schemaname = 'public' and tablename = 'admins' and policyname = 'public read admins') then
+    create policy "public read admins" on public.admins for select using (true);
+  end if;
+  if not exists (select 1 from pg_policies where schemaname = 'public' and tablename = 'admins' and policyname = 'public write admins') then
+    create policy "public write admins" on public.admins for all using (true) with check (true);
+  end if;
+end $$;

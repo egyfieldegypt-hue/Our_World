@@ -5,9 +5,9 @@ import { supabase } from '../lib/supabase';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import Login, { SESSION_KEY, restoreSession } from './Login';
 import { Btn, Field, TextArea, TextInput, inputCls } from './fields';
-import { ChaptersManager, LettersManager, MemoryManager, SongsManager } from './managers';
+import { AdminsManager, ChaptersManager, LettersManager, MemoryManager, SongsManager } from './managers';
 
-const TABS = ['memories', 'songs', 'letters', 'chapters', 'settings', 'texts'];
+const TABS = ['memories', 'songs', 'letters', 'chapters', 'settings', 'texts', 'admins'];
 
 function SettingsManager() {
   const { t } = useLanguage();
@@ -144,6 +144,7 @@ const MANAGERS = {
   chapters: ChaptersManager,
   settings: SettingsManager,
   texts: TextsManager,
+  admins: AdminsManager,
 };
 
 export default function DashboardApp() {

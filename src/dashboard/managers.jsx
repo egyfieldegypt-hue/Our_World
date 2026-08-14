@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { useData } from '../hooks/useData';
 import { storageUrl } from '../lib/supabase';
 import { Btn, AudioField, ColorField, Field, ImageField, Modal, TextArea, TextInput } from './fields';
 import { supabase } from '../lib/supabase';
+import { hashAdminPassword, makeSalt } from './auth';
 import { IconArrowDown, IconArrowUp } from '../components/shared/icons';
 
 const CATS = ['dates', 'trips', 'random', 'favorites'];
@@ -84,9 +85,11 @@ function ListShell({ items, onAdd, onEdit, onDelete, onMoveUp, onMoveDown, rende
                   </button>
                 </div>
               )}
-              <button type="button" onClick={() => onEdit(it)} className="rounded-full border border-white/10 px-4 py-1.5 text-xs font-bold text-cream/70 transition-colors hover:border-gold/50 hover:text-gold">
-                {t('dashboard.actions.edit')}
-              </button>
+              {onEdit && (
+                <button type="button" onClick={() => onEdit(it)} className="rounded-full border border-white/10 px-4 py-1.5 text-xs font-bold text-cream/70 transition-colors hover:border-gold/50 hover:text-gold">
+                  {t('dashboard.actions.edit')}
+                </button>
+              )}
               <button type="button" onClick={() => window.confirm(t('dashboard.actions.confirmDelete')) && onDelete(it.id)} className="rounded-full border border-white/10 px-4 py-1.5 text-xs font-bold text-cream/50 transition-colors hover:border-rose/50 hover:text-rose">
                 {t('dashboard.actions.delete')}
               </button>
@@ -200,6 +203,82 @@ export function MemoryManager() {
 }
 
 const emptySong = () => ({ sort: 0, title: { ar: '', en: '' }, artist: { ar: '', en: '' }, audioUrl: '', spotifyUrl: '', isDefault: false, accent: '#D98C9A', chord: [] });
+
+export function AdminsManager() {
+  const { t } = useLanguage();
+  const [admins, setAdmins] = useState([]);
+  const [editing, setEditing] = useState(null);
+  const [saving, setSaving] = useState(false);
+
+  async function load() {
+    if (!supabase) return;
+    const { data, error } = await supabase.from('admins').select('id,username,created_at').order('created_at', { ascending: true });
+    if (error) {
+      window.alert(error.message);
+      return;
+    }
+    setAdmins(data ?? []);
+  }
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  function openNew() {
+    setEditing({ username: '', password: '' });
+  }
+
+  async function save() {
+    const username = editing.username.trim().toLowerCase();
+    if (!username || !editing.password) return;
+    setSaving(true);
+    const okk = await run(async () => {
+      const salt = makeSalt();
+      const password_hash = await hashAdminPassword(username, editing.password, salt);
+      const res = await supabase.from('admins').insert({ username, salt, password_hash });
+      if (res.error) throw res.error;
+      await load();
+    });
+    setSaving(false);
+    if (okk) setEditing(null);
+  }
+
+  async function remove(id) {
+    if (!window.confirm(t('dashboard.actions.confirmDelete'))) return;
+    const okk = await run(async () => {
+      const res = await supabase.from('admins').delete().eq('id', id);
+      if (res.error) throw res.error;
+      await load();
+    });
+    if (!okk) await load();
+  }
+
+  return (
+    <>
+      <ListShell
+        items={admins}
+        onAdd={openNew}
+        onEdit={null}
+        onDelete={remove}
+        empty={t('dashboard.empty')}
+        renderRow={(admin) => (
+          <div className="min-w-0">
+            <p className="truncate font-display font-bold text-cream">{admin.username}</p>
+            <p className="truncate text-xs text-cream/45" dir="ltr">{admin.created_at ? new Date(admin.created_at).toLocaleString() : ''}</p>
+          </div>
+        )}
+      />
+      <EditorModal open={!!editing} title={t('dashboard.tabs.admins')} onClose={() => setEditing(null)} onSave={save} saving={saving}>
+        {editing && (
+          <>
+            <TextInput label={t('dashboard.username')} value={editing.username} onChange={(v) => setEditing({ ...editing, username: v })} />
+            <TextInput label={t('dashboard.password')} type="password" value={editing.password} onChange={(v) => setEditing({ ...editing, password: v })} />
+          </>
+        )}
+      </EditorModal>
+    </>
+  );
+}
 
 export function SongsManager() {
   const { t } = useLanguage();
