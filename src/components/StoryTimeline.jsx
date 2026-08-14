@@ -75,7 +75,7 @@ export default function StoryTimeline() {
                     </div>
 
                     <div className="relative overflow-hidden rounded-2xl border border-white/5 shadow-[0_18px_60px_-20px_rgba(0,0,0,0.8)]">
-                      <ImageReveal src={m.image} alt={m.title[lang]} ratio="4/3" />
+                      <ImageReveal src={m.image} alt={m.title[lang]} ratio="auto" fit="contain" />
                       <div
                         aria-hidden="true"
                         className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent"

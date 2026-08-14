@@ -34,10 +34,23 @@ export default function MusicPlayer({
   const cbRef = useRef({ onNext });
   cbRef.current.onNext = onNext;
 
+  const seekToRatio = (clientX, target) => {
+    const rect = target.getBoundingClientRect();
+    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    const nextTime = ratio * DURATION;
+    if (usesAudio && audioRef.current) {
+      audioRef.current.currentTime = nextTime;
+    }
+    onSeek(nextTime);
+  };
+
   // real audio element path
   useEffect(() => {
     if (!usesAudio) return;
+    setRealDuration(0);
+    onSeek(0);
     const audio = new Audio(storageUrl(song.audioUrl));
+    audio.preload = 'metadata';
     const handleEnded = () => cbRef.current.onNext();
     const handleDurationChange = () => {
       if (Number.isFinite(audio.duration)) setRealDuration(audio.duration);
@@ -213,11 +226,14 @@ export default function MusicPlayer({
                 type="button"
                 aria-hidden="true"
                 tabIndex={-1}
-                className="block h-1.5 w-full cursor-pointer overflow-hidden rounded-full bg-white/10"
-                onClick={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const ratio = (e.clientX - rect.left) / rect.width;
-                  onSeek(ratio * DURATION);
+                className="block h-3 w-full cursor-pointer overflow-hidden rounded-full bg-white/10"
+                onPointerDown={(e) => {
+                  e.currentTarget.setPointerCapture(e.pointerId);
+                  seekToRatio(e.clientX, e.currentTarget);
+                }}
+                onPointerMove={(e) => {
+                  if (e.buttons !== 1) return;
+                  seekToRatio(e.clientX, e.currentTarget);
                 }}
               >
                 <span
