@@ -1,0 +1,205 @@
+{
+  "brand": {
+    "name": "BAYNA",
+    "full": "BAYNA | بينّا",
+    "tagline": "A little place for our memories."
+  },
+  "gate": {
+    "title": "BAYNA",
+    "subtitle": "Our private place — sign in to see the story"
+  },
+  "nav": {
+    "home": "Home",
+    "story": "Story",
+    "memories": "Memories",
+    "soundtrack": "Soundtrack",
+    "letters": "Letters"
+  },
+  "hero": {
+    "label": "BAYNA",
+    "headline1": "Every little moment",
+    "headline2": "became part of us.",
+    "sub": "From the first moment... to every moment after.",
+    "since": "Since {date}",
+    "cta": "Enter our story ↓",
+    "scroll": "Scroll down"
+  },
+  "story": {
+    "eyebrow": "From the beginning",
+    "title": "Our Story",
+    "subtitle": "Some moments deserve to be remembered.",
+    "timelineLabel": "From the beginning... to right now",
+    "datePrefix": "On"
+  },
+  "wall": {
+    "eyebrow": "Our memories",
+    "title": "Memory Wall",
+    "subtitle": "A collection of moments we never want to lose.",
+    "filters": {
+      "all": "All",
+      "dates": "Dates",
+      "trips": "Trips",
+      "random": "Random Moments",
+      "favorites": "Favorites"
+    },
+    "empty": "No memories here yet — but that won't last long.",
+    "favorite": "One of our favorites",
+    "open": "Open image"
+  },
+  "lightbox": {
+    "counter": "{current} of {total}",
+    "close": "Close",
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "soundtrack": {
+    "eyebrow": "Our sound",
+    "title": "Our Soundtrack",
+    "subtitle": "Some memories have a melody.",
+    "nowPlaying": "Now playing",
+    "listLabel": "Our soundtrack"
+  },
+  "player": {
+    "nowPlaying": "Now playing",
+    "play": "Play",
+    "pause": "Pause",
+    "next": "Next song",
+    "prev": "Previous song",
+    "close": "Close player",
+    "pickFromLibrary": "Choose a melody below — let it tell our story."
+  },
+  "letters": {
+    "eyebrow": "My words",
+    "title": "Things I Never Want You To Forget",
+    "subtitle": "Things I may not have said at the time.",
+    "open": "Open",
+    "close": "Fold the letter",
+    "forYou": "For you",
+    "seal": "Our seal"
+  },
+  "counter": {
+    "eyebrow": "The count",
+    "title": "We've been us for",
+    "still": "And we're still counting...",
+    "units": {
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    }
+  },
+  "movie": {
+    "eyebrow": "Our film",
+    "title": "THE STORY OF US",
+    "subtitle": "A film with no ending.",
+    "chapter": "Chapter {n}",
+    "nextChapter": "Next chapter"
+  },
+  "final": {
+    "line1": "To be continued...",
+    "line2": "Everything before this was only the beginning."
+  },
+  "footer": {
+    "madeFor": "Made with love, for {names}",
+    "top": "Back to top",
+    "rights": "Every memory of ours lives in our hearts.",
+    "dashboard": "Dashboard",
+    "logout": "Sign out"
+  },
+  "dashboard": {
+"title": "Dashboard",
+    "subtitle": "Everything in BAYNA, from here",
+    "username": "Username",
+    "password": "Password",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "backToSite": "Back to site",
+    "welcome": "Welcome back",
+    "tabs": {
+      "memories": "Memories",
+      "songs": "Songs",
+      "letters": "Letters",
+      "chapters": "Chapters",
+      "settings": "Settings",
+      "texts": "Texts"
+    },
+    "actions": {
+      "add": "Add",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "confirmDelete": "Are you sure you want to delete this?",
+      "saved": "Saved"
+    },
+    "common": {
+      "titleAr": "Title (Arabic)",
+      "titleEn": "Title (English)",
+      "descAr": "Description (Arabic)",
+      "descEn": "Description (English)",
+      "locationAr": "Location (Arabic)",
+      "locationEn": "Location (English)",
+      "image": "Image or URL",
+      "upload": "Upload image",
+      "uploadAudio": "Upload audio",
+      "uploading": "Uploading...",
+      "removeImage": "Remove image",
+      "sort": "Order",
+      "date": "Date",
+      "accent": "Color",
+      "categories": "Categories",
+      "aspect": "Image ratio",
+      "section": "Where does it appear?",
+      "sectionOptions": {
+        "both": "Both",
+        "timeline": "Timeline only",
+        "wall": "Wall only"
+      },
+      "artistAr": "Artist / note (Arabic)",
+      "artistEn": "Artist / note (English)",
+      "audioUrl": "Audio file URL — or upload a file from your device",
+      "spotifyUrl": "Spotify track link (optional)",
+      "isDefault": "Welcome song (plays when the site opens)",
+      "chord": "Ambient chord tones, comma separated — e.g. 110,164.81,220",
+      "triggerAr": "Letter title (Arabic)",
+      "triggerEn": "Letter title (English)",
+      "contentAr": "Letter content (Arabic) — blank line between paragraphs",
+      "contentEn": "Letter content (English) — blank line between paragraphs",
+      "number": "Chapter number"
+    },
+    "empty": "Nothing here yet — press \"Add\"",
+    "settings": {
+      "startDate": "Start date (the counter counts from here)",
+      "namesAr": "Names (Arabic)",
+      "namesEn": "Names (English)",
+      "storyCount": "Number of memories in the timeline",
+      "save": "Save settings"
+    },
+    "texts": {
+      "hint": "Type what you want to override as JSON — e.g. {\"nav\":{\"home\":\"Home\"}}",
+      "ar": "Text overrides — Arabic",
+      "en": "Text overrides — English",
+      "save": "Save texts",
+      "reset": "Clear overrides",
+      "parseError": "Invalid JSON — please check the syntax"
+    },
+"auth": {
+      "invalid": "Wrong username or password",
+      "locked": "Try again in {seconds}s — too many attempts",
+      "generic": "Something went wrong: {message}"
+    }
+  },
+  "aria": {
+    "menu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchLanguage": "Switch language",
+    "languageArabic": "Switch to Arabic",
+    "languageEnglish": "Switch to English",
+    "backToTop": "Back to top",
+    "counterLabel": "The time we have spent together",
+    "filter": "Memory filter",
+    "chapterImage": "Image of {title}"
+  }
+}

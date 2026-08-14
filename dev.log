@@ -1,0 +1,50 @@
+
+> bayna@1.0.0 dev
+> vite --port 5174
+
+
+  [32m[1mVITE[22m v5.4.21[39m  [2mready in [0m[1m442[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5174[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.56.1:[1m5174[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.0.104:[1m5174[22m/[39m
+[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+[2m3:34:47 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Soundtrack.jsx, /src/index.css[22m
+[2m3:45:34 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/shared/icons.jsx, /src/index.css[22m
+[2m3:45:35 AM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/dashboard/managers.jsx[22m
+[2m3:45:39 AM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/dashboard/managers.jsx[22m
+[2m3:45:53 AM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/dashboard/managers.jsx[22m
+[2m3:46:06 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/i18n/I18nProvider.jsx, /src/index.css[22m
+[2m3:46:06 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/i18n/I18nProvider.jsx, /src/index.css[22m
+[2m3:46:22 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/MusicPlayer.jsx, /src/index.css[22m
+[2m3:46:23 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/MusicPlayer.jsx, /src/index.css[22m
+[2m3:46:35 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Soundtrack.jsx, /src/index.css[22m
+[2m3:46:36 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Soundtrack.jsx, /src/index.css[22m
+[2m3:46:37 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Soundtrack.jsx, /src/index.css[22m
+[2m3:46:38 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Soundtrack.jsx, /src/index.css[22m
+[2m3:53:16 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/i18n/I18nProvider.jsx, /src/index.css[22m
+[2m3:53:17 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/i18n/I18nProvider.jsx, /src/index.css[22m
+[2m3:53:51 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/i18n/I18nProvider.jsx, /src/index.css[22m
+[2m3:56:18 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Navbar.jsx, /src/index.css[22m
+[2m3:56:19 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Navbar.jsx, /src/index.css[22m
+[2m3:56:20 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Navbar.jsx, /src/index.css[22m
+[2m4:04:48 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/data/DataProvider.jsx, /src/index.css[22m
+[2m4:04:49 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/MemoryWall.jsx, /src/index.css[22m
+[2m4:04:50 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/StoryTimeline.jsx, /src/index.css[22m
+[2m4:05:06 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/data/DataProvider.jsx, /src/index.css, /src/components/MemoryWall.jsx[22m
+[2m4:05:06 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/data/DataProvider.jsx, /src/index.css, /src/components/MemoryWall.jsx[22m
+[2m4:05:06 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/data/DataProvider.jsx, /src/index.css, /src/components/MemoryWall.jsx[22m
+[2m4:05:07 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/data/DataProvider.jsx, /src/index.css, /src/components/MemoryWall.jsx[22m
+[2m4:05:07 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/data/DataProvider.jsx, /src/index.css, /src/components/MemoryWall.jsx[22m
+[2m4:05:07 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/data/DataProvider.jsx, /src/index.css, /src/components/MemoryWall.jsx[22m
+[2m4:05:08 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/data/DataProvider.jsx, /src/index.css, /src/components/MemoryWall.jsx[22m
+[2m4:05:09 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/data/DataProvider.jsx, /src/index.css, /src/components/MemoryWall.jsx[22m
+[2m4:05:09 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/data/DataProvider.jsx, /src/index.css, /src/components/MemoryWall.jsx[22m
+[2m4:05:16 AM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/dashboard/managers.jsx[22m
+[2m4:05:18 AM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/dashboard/managers.jsx[22m
+[2m4:05:24 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/i18n/I18nProvider.jsx, /src/index.css[22m
+[2m4:05:25 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/i18n/I18nProvider.jsx, /src/index.css[22m
+[2m4:05:32 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/i18n/I18nProvider.jsx, /src/index.css[22m
+[2m4:05:33 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/i18n/I18nProvider.jsx, /src/index.css[22m
+[2m4:09:22 AM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/Counter.jsx, /src/index.css[22m
+[2m4:13:00 AM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/dashboard/managers.jsx[22m
