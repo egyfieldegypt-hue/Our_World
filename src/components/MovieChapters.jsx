@@ -49,7 +49,7 @@ export default function MovieChapters() {
                   style={reduce ? undefined : { y }}
                   className={`relative ${flipSide ? 'lg:order-2' : ''}`}
                 >
-                  <div className="overflow-hidden rounded-3xl border border-white/8 shadow-[0_26px_80px_-28px_rgba(0,0,0,0.9)]">
+                  <div className="overflow-hidden rounded-3xl border border-white/8 bg-black/55 shadow-[0_26px_80px_-28px_rgba(0,0,0,0.9)]">
                     <motion.div
                       initial={reduce ? false : { opacity: 0, scale: 1.12 }}
                       whileInView={{ opacity: 1, scale: 1 }}
@@ -60,7 +60,7 @@ export default function MovieChapters() {
                         src={storageUrl(chapter.image)}
                         alt={t('aria.chapterImage', { title: chapter.title[lang] })}
                         loading="lazy"
-                        className="aspect-[16/10] w-full object-cover"
+                        className="h-auto max-h-[72vh] w-full object-contain"
                       />
                     </motion.div>
                   </div>
