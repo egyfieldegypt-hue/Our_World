@@ -15,6 +15,7 @@ export default function Soundtrack() {
 
   const [activeId, setActiveId] = useState(null);
   const [playing, setPlaying] = useState(false);
+  const [playAttempt, setPlayAttempt] = useState(0);
   const [elapsed, setElapsed] = useState(0);
   const [banner, setBanner] = useState(false);
   const userPickedRef = useRef(false);
@@ -33,20 +34,27 @@ export default function Soundtrack() {
       setActiveId(def.id);
       setElapsed(0);
       setPlaying(true);
+      setPlayAttempt((n) => n + 1);
     }
   }, [songs, activeId]);
 
   useEffect(() => {
     const onFirstGesture = () => {
-      if (activeSongRef.current?.audioUrl && !playingRef.current) setPlaying(true);
+      if (!activeSongRef.current) return;
+      setPlaying(true);
+      setPlayAttempt((n) => n + 1);
     };
-    window.addEventListener('pointerdown', onFirstGesture, { once: true, passive: true });
-    return () => window.removeEventListener('pointerdown', onFirstGesture);
+    const events = ['pointerdown', 'keydown', 'touchstart'];
+    events.forEach((event) => window.addEventListener(event, onFirstGesture, { once: true, passive: true }));
+    return () => events.forEach((event) => window.removeEventListener(event, onFirstGesture));
   }, [activeId]);
 
   const toggle = useCallback(() => {
     if (!activeSong) return;
-    setPlaying((p) => !p);
+    setPlaying((p) => {
+      if (!p) setPlayAttempt((n) => n + 1);
+      return !p;
+    });
   }, [activeSong]);
 
   const next = useCallback(() => {
@@ -56,6 +64,7 @@ export default function Soundtrack() {
     setActiveId(nxt.id);
     setElapsed(0);
     setPlaying(true);
+    setPlayAttempt((n) => n + 1);
   }, [activeSong, songs.length]);
 
   const prev = useCallback(() => {
@@ -65,6 +74,7 @@ export default function Soundtrack() {
     setActiveId(prv.id);
     setElapsed(0);
     setPlaying(true);
+    setPlayAttempt((n) => n + 1);
   }, [activeSong, songs.length]);
 
   const close = useCallback(() => {
@@ -132,6 +142,7 @@ export default function Soundtrack() {
                       setActiveId(song.id);
                       setElapsed(0);
                       setPlaying(true);
+                      setPlayAttempt((n) => n + 1);
                       setBanner(true);
                     }
                   }}
@@ -190,11 +201,13 @@ export default function Soundtrack() {
         <MusicPlayer
           song={activeSong}
           playing={playing}
+          playAttempt={playAttempt}
           compact={!banner}
           onToggle={toggle}
           onNext={next}
           onPrev={prev}
           onClose={close}
+          onPlaybackBlocked={() => setPlaying(false)}
           elapsed={elapsed}
           onSeek={seek}
         />

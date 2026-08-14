@@ -10,7 +10,19 @@ import { IconClose, IconNext, IconPause, IconPlay, IconPrev } from './shared/ico
  * shown (used for the auto-playing welcome song) — the full banner
  * appears once the user picks a song from the list.
  */
-export default function MusicPlayer({ song, playing, onToggle, onNext, onPrev, onClose, elapsed, onSeek, compact = false }) {
+export default function MusicPlayer({
+  song,
+  playing,
+  playAttempt = 0,
+  onToggle,
+  onNext,
+  onPrev,
+  onClose,
+  onPlaybackBlocked,
+  elapsed,
+  onSeek,
+  compact = false,
+}) {
   const { t, lang } = useLanguage();
   const audioRef = useRef(null);
   const [realDuration, setRealDuration] = useState(0);
@@ -38,7 +50,7 @@ export default function MusicPlayer({ song, playing, onToggle, onNext, onPrev, o
     audioRef.current = audio;
 
     if (playing) {
-      audio.play().catch(() => {});
+      audio.play().catch(() => onPlaybackBlocked?.());
     }
 
     return () => {
@@ -53,16 +65,16 @@ export default function MusicPlayer({ song, playing, onToggle, onNext, onPrev, o
   useEffect(() => {
     const audio = audioRef.current;
     if (!usesAudio || !audio) return;
-    if (playing) audio.play().catch(() => {});
+    if (playing) audio.play().catch(() => onPlaybackBlocked?.());
     else audio.pause();
-  }, [usesAudio, playing]);
+  }, [usesAudio, playing, playAttempt]);
 
   // ambient engine path
   useEffect(() => {
     if (!song || usesAudio || embedUrl) return;
     if (playing) startAmbient(song.chord);
     else pauseAmbient();
-  }, [song, playing, embedUrl]);
+  }, [song, playing, embedUrl, playAttempt]);
 
   // cleanup when switching/closing
   useEffect(() => {
