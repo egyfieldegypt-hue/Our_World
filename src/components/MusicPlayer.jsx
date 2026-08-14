@@ -179,11 +179,11 @@ export default function MusicPlayer({
               src={embedUrl}
               title={song.title[lang]}
               width="100%"
-              height="80"
+              height="152"
               frameBorder="0"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
-              className="min-w-0 rounded-xl sm:w-[220px] sm:shrink-0"
+              className="min-w-0 rounded-xl sm:w-[320px] sm:shrink-0"
             />
             <button
               type="button"
