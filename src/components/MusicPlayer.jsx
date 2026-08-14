@@ -173,23 +173,23 @@ export default function MusicPlayer({
     >
       <div className="glass w-full max-w-2xl rounded-2xl p-3 shadow-[0_18px_60px_-18px_rgba(0,0,0,0.85)]">
         {embedUrl ? (
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             {trackInfo}
             <iframe
               src={embedUrl}
               title={song.title[lang]}
-              width="220"
+              width="100%"
               height="80"
               frameBorder="0"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
-              className="shrink-0 rounded-xl"
+              className="min-w-0 rounded-xl sm:w-[220px] sm:shrink-0"
             />
             <button
               type="button"
               onClick={onClose}
               aria-label={t('player.close')}
-              className="grid size-9 shrink-0 place-items-center rounded-full text-cream/50 transition-colors hover:text-rose"
+              className="absolute end-2 top-2 grid size-9 shrink-0 place-items-center rounded-full text-cream/50 transition-colors hover:text-rose sm:static"
             >
               <IconClose className="size-4" />
             </button>

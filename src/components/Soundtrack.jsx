@@ -34,6 +34,7 @@ export default function Soundtrack() {
       setActiveId(def.id);
       setElapsed(0);
       setPlaying(true);
+      setBanner(Boolean(def.spotifyUrl));
       setPlayAttempt((n) => n + 1);
     }
   }, [songs, activeId]);
