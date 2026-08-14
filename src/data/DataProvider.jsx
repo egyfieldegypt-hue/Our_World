@@ -11,7 +11,6 @@ import {
   songToRow,
 } from '../lib/adapters';
 import { memories as fallbackMemories } from './memories';
-import { songs as fallbackSongs } from './songs';
 import { letters as fallbackLetters } from './letters';
 import { chapters as fallbackChapters } from './chapters';
 import { NAMES, START_DATE, STORY_COUNT } from './siteConfig';
@@ -23,11 +22,12 @@ import { NAMES, START_DATE, STORY_COUNT } from './siteConfig';
 const mark = (items) => items.map((x) => ({ ...x, _fb: true }));
 const markedFallbacks = {
   memories: mark(fallbackMemories),
-  songs: mark(fallbackSongs),
+  songs: [],
   letters: mark(fallbackLetters),
   chapters: mark(fallbackChapters),
 };
 const useList = (rows, key) => (rows && rows.length ? rows : markedFallbacks[key]);
+const useSongs = (rows) => (rows && rows.length ? rows : []);
 
 const fallbackConfig = {
   start_date: START_DATE,
@@ -53,7 +53,7 @@ function isMissingTables(err) {
 export function DataProvider({ children }) {
   const [state, setState] = useState({
     memories: markedFallbacks.memories,
-    songs: markedFallbacks.songs,
+    songs: [],
     letters: markedFallbacks.letters,
     chapters: markedFallbacks.chapters,
     config: fallbackConfig,
@@ -74,7 +74,7 @@ export function DataProvider({ children }) {
       const cfg = configRows?.data ?? null;
       setState({
         memories: useList(memories.map(rowToMemory), 'memories'),
-        songs: useList(songs.map(rowToSong), 'songs'),
+        songs: useSongs(songs.map(rowToSong)),
         letters: useList(letters.map(rowToLetter), 'letters'),
         chapters: useList(chapters.map(rowToChapter), 'chapters'),
         config: cfg

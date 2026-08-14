@@ -10,8 +10,9 @@ import { IconChevronRight, IconClose, IconPin } from './shared/icons';
  * follow the current RTL/LTR reading direction.
  */
 export default function MemoryLightbox({ memories, index, onClose, onMove }) {
-  const { t, lang, isAr } = useLanguage();
+  const { t, lang } = useLanguage();
   const closeRef = useRef(null);
+  const scrollYRef = useRef(0);
 
   const current = index != null ? memories[index] : null;
   const total = memories.length;
@@ -23,22 +24,44 @@ export default function MemoryLightbox({ memories, index, onClose, onMove }) {
 
   useEffect(() => {
     if (index == null) return;
-    document.body.style.overflow = 'hidden';
+    scrollYRef.current = window.scrollY;
+    const { style } = document.body;
+    const previous = {
+      position: style.position,
+      top: style.top,
+      left: style.left,
+      right: style.right,
+      width: style.width,
+      overflow: style.overflow,
+    };
+
+    style.position = 'fixed';
+    style.top = `-${scrollYRef.current}px`;
+    style.left = '0';
+    style.right = '0';
+    style.width = '100%';
+    style.overflow = 'hidden';
 
     const onKey = (e) => {
       if (e.key === 'Escape') onClose();
-      if (e.key === (isAr ? 'ArrowRight' : 'ArrowRight')) step(1);
-      if (e.key === (isAr ? 'ArrowLeft' : 'ArrowLeft')) step(-1);
+      if (e.key === 'ArrowRight') step(1);
+      if (e.key === 'ArrowLeft') step(-1);
     };
     window.addEventListener('keydown', onKey);
     const id = window.setTimeout(() => closeRef.current?.focus(), 50);
 
     return () => {
-      document.body.style.overflow = '';
+      style.position = previous.position;
+      style.top = previous.top;
+      style.left = previous.left;
+      style.right = previous.right;
+      style.width = previous.width;
+      style.overflow = previous.overflow;
+      window.scrollTo(0, scrollYRef.current);
       window.removeEventListener('keydown', onKey);
       window.clearTimeout(id);
     };
-  }, [index, isAr, onClose, step]);
+  }, [index, onClose, step]);
 
   return (
     <AnimatePresence>
@@ -76,20 +99,20 @@ export default function MemoryLightbox({ memories, index, onClose, onMove }) {
           <div className="relative flex min-h-0 flex-1 items-center justify-center px-4 pb-4 sm:px-20">
             <button
               type="button"
-              onClick={() => step(-1)}
-              aria-label={t('lightbox.prev')}
-              className="absolute start-3 sm:start-6 z-10 grid size-12 place-items-center rounded-full border border-white/10 bg-ink/50 text-cream/80 backdrop-blur-sm transition-all hover:border-gold/50 hover:text-gold"
+              onClick={() => step(1)}
+              aria-label={t('lightbox.next')}
+              className="absolute right-3 z-10 grid size-12 place-items-center rounded-full border border-white/10 bg-ink/50 text-cream/80 backdrop-blur-sm transition-all hover:border-gold/50 hover:text-gold sm:right-6"
             >
-              <IconChevronRight className="arrow-forward size-5 rotate-180" />
+              <IconChevronRight className="size-5" />
             </button>
 
             <button
               type="button"
-              onClick={() => step(1)}
-              aria-label={t('lightbox.next')}
-              className="absolute end-3 sm:end-6 z-10 grid size-12 place-items-center rounded-full border border-white/10 bg-ink/50 text-cream/80 backdrop-blur-sm transition-all hover:border-gold/50 hover:text-gold"
+              onClick={() => step(-1)}
+              aria-label={t('lightbox.prev')}
+              className="absolute left-3 z-10 grid size-12 place-items-center rounded-full border border-white/10 bg-ink/50 text-cream/80 backdrop-blur-sm transition-all hover:border-gold/50 hover:text-gold sm:left-6"
             >
-              <IconChevronRight className="arrow-forward size-5" />
+              <IconChevronRight className="size-5 rotate-180" />
             </button>
 
             <AnimatePresence mode="wait">
